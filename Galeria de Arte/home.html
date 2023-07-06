@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title id="titulo" >GaleriaGear Art</title>
+    <script type='text/javascript' src='assets/script.js' async></script>
+    <link rel="stylesheet" href="assets/home.css">
+    <link rel="stylesheet" href="assets/reset.css">
+    
+</head>
+<body>
+    <div id="logo">
+        <img src="assets/img/Logo.png" height="150px">
+    </div>
+    <box id="shopCart">
+        <img src="assets/img/CCompra.png">
+    </box>
+    <box id="heart">
+        <img src="assets/img/coracao2.png">
+    </box>
+    <div id="mercha" >
+        <div class ="mercha"> Cadastre-se </div>
+    </div>
+
+    <div id="seNLogado" class="hidden">
+        faça o login para concluir essa ação!
+    </div>
+
+    <div class="container">
+        <div class="abas">
+            <button  data-aba="homepage" id="homepage">Pagina inicial</button>
+            <button data-aba="catalogo" id="catalogo">Catálogo</button>
+            <button data-aba="contate" id="contate">Contate-nos</button>
+            <button data-aba="config" id="config">Sua conta</button>            
+           
+        </div>
+
+    <div class="conteudos">
+
+        <section data-conteudo="homepageSec" id="homepageSec">
+            <div id="bemVindo">
+                Bem vindo ao Gear Art!
+            </div>
+
+            <div id="textHome"> 
+                Explore uma Experiência Visual Excepcional
+                Ao entrar na plataforma Gear-Art, você será recebido por uma experiência visual excepcional.
+                 Com um design elegante e intuitivo, a galeria online oferece uma variedade de obras de arte que 
+                abrangem diferentes estilos, técnicas e temas. Você poderá navegar facilmente pelas diferentes seções,
+                como pintura, escultura, fotografia, arte digital e muito mais.
+            </div>
+            <div id="portaFoto">
+               <img src="assets/img/pinturarr.png" id="imgHome" height="300px"> 
+            </div>
+            
+            <div id="textHome2"> 
+                Descubra Novos Talentos e Artistas Estabelecidos
+                Uma das principais missões do Gear-Art é fornecer uma plataforma para artistas emergentes ganharem 
+                visibilidade e reconhecimento. Você terá a oportunidade de descobrir talentos promissores e explorar 
+                suas criações únicas. Além disso, a galeria também apresenta obras de artistas estabelecidos e renomados,
+                 oferecendo uma ampla gama de opções para os amantes da arte.
+            </div>
+        </section>
+
+        <section data-conteudo="catalogoSec" id="catalogoSec" class="hidden">
+                <label for="filtrarAutor">Filtrar por Autor:</label>
+                <select id="filtrarAutor">
+                    <option value="Todos">Todos</option>
+                    <option value="Van Gogh">Van Gogh</option>
+                    <option value="Claude Monet">Claude Monet</option>
+                    <option value="Leonardo da Vinc">Leonardo da Vinc</option>
+                    <option value="Frida Khalo">Frida Khalo</option>
+                </select>
+
+            <div class="catalogo">
+
+            </div>
+
+        </section>
+
+        <section data-conteudo="contateSec" id="contateSec" class="hidden">
+            <div id="contatoCss">
+                Entre em contato conosco, Sua participação é muito importante para nós!
+                Email: gearArt@gmail.com.
+            </div>
+        </section>
+
+        <section data-conteudo="configSec" id="configSec" class="hidden">
+            <main>
+                <div class="container">
+                    <div class="abas2">
+                        <button data-aba="entrar" id="abaEntrar" data-open>Entrar</button>
+                        <button data-aba="cadastrar" id="abaCadastrar">Cadastre-se</button>
+                    </div>
+    
+                    <div class="conteudo">
+                        <div data-conteudo="entrar" id="entrar" class="hidden">
+                            <form class="form">
+                                <input id="enEmail" type="text" name="email" placeholder="Seu e-mail">
+                                <input id="enPassword" type="password" name="senha" placeholder="Sua senha">
+                                <button id="ent">Entrar</button>
+
+                                <button id="btnSuaConta" class="hidden"> Ir para sua conta</button> 
+                                <div id="aut-simple2">
+                            
+                                </div>
+
+                            </form>
+                        </div>
+                    
+                        <div data-conteudo="cadastrar" id="cadastrar" class="hidden">
+                            <form class="form">
+                                <input id="name" type="text" name="nome" placeholder="Seu nome">
+                                <input id="email" type="text" name="email" placeholder="Seu e-mail">
+                                <input id="password" type="password" name="senha" placeholder="Sua Senha">
+                            <button id="cadastre">Cadastrar</button>
+                            <div id="aut-simple">
+                            
+                            </div>   
+                            <span id="textaPassword">
+                            
+                            </span>
+
+                        </form>
+                        </div>
+                    </div>
+
+                </div>
+        </main>
+        </section>
+
+        <section data-conteudo="carrinhoCompras" id="carrinhoCompras" class="hidden">
+            <div class="container">
+                <div id="tittle">Carrinho de Compras</div>
+                <div class="abaCarinho">----------ITEM-----------</div>
+                
+                <div class="cart-items">
+
+                </div>
+
+                <div id="precoTotal">
+                    Preço total: 0
+                </div>
+
+                <button id="comprarItem">Comprar</button>
+            </div>
+        </section>
+
+        <section data-conteudo="favoritos" id="favoritos" class="hidden">
+            <div class="container">
+                <div id="tittle">
+                    Favoritos
+                </div>
+
+                <div id="itensFavoritos">
+
+                </div>
+
+            </div>
+
+        </section>
+
+        
+        <section data-conteudo="suaConta" id="suaConta" class="hidden">
+            <main>
+                <div class="container">
+                    <div id="contaBah">
+                        Sua Conta
+                    </div>
+                   
+                    <div class="conteudoCc"> 
+                        <img id="imgPerfil" src="assets/img/imgPerfil.png" height="300px">
+                        
+                        <div id="seuNome">
+
+                        </div>
+
+                        <div id="seuEmail" >
+
+                        </div>
+
+                        <button id="logout" class="logoutCss"> Sair </button>
+                        
+                    </div>
+                </div>
+                
+            </main>
+        </section>
+        
+    </div>
+</body>
+</html>
