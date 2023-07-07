@@ -32,8 +32,8 @@
         <div class="abas">
             <button  data-aba="homepage" id="homepage">Pagina inicial</button>
             <button data-aba="catalogo" id="catalogo">Catálogo</button>
-            <button data-aba="contate" id="contate">Contate-nos</button>
-            <button data-aba="config" id="config">Sua conta</button>            
+            <button data-aba="cadPinturas" id="cadPinturas" class="hidden">Pinturas</button>
+            <button data-aba="config" id="config">Sua conta</button>           
            
         </div>
 
@@ -80,11 +80,44 @@
 
         </section>
 
-        <section data-conteudo="contateSec" id="contateSec" class="hidden">
-            <div id="contatoCss">
-                Entre em contato conosco, Sua participação é muito importante para nós!
-                Email: gearArt@gmail.com.
+        <section data-conteudo="cadPinturasSec" id="cadPinturasSec" class="hidden">
+           <div class="container">
+            <div class="cadConteudo">
+                <div id="titCadProd">
+                    <h2>
+                        Insira uma nova pintura no catalogo!
+                    </h2>
+                   
+                </div>
+
+                <div data-conteudo="cadastrarProd" id="cadastrarProd">
+                    <form class="form">
+                        <input id="nomeProd" type="text" name="nome" placeholder="Nome da Obra de Arte">
+                        <input id="autorProd" type="text" name="autor" placeholder="Nome do Autor da Obra">
+                        <input id="precoProd" type="number" name="preco" placeholder="Quanto a Obra custa?">
+                 
+                        <select id="imgProd">
+                            <option value="Frida Kahlo Autoretrato">Frida Kahlo Autoretrato</option>
+                            <option value="Frida Kahlo Vestidos">Frida Kahlo Vestidos</option>
+                            <option value="Van Gogh bar">Van Gogh bar</option>
+                            <option value="Van Gogh paisagem">Van Gogh paisagem</option>
+                            <option value="Van Gogh casa">Van Gogh casa</option>
+                            <option value="Leonardo d Vinc autoretrato">Leonardo d Vinc autoretrato</option>
+                        </select>
+
+                        <div id="mostraImgs">
+
+                        </div>
+
+                        <button id="btnCadProd">Cadastrar</button>
+                        <div id="cadProdOk">
+
+                        </div>
+                    </form>
+                </div>
+
             </div>
+           </div>
         </section>
 
         <section data-conteudo="configSec" id="configSec" class="hidden">
@@ -181,8 +214,10 @@
 
                         </div>
 
-                        <button id="logout" class="logoutCss"> Sair </button>
-                        
+                        <button id="logout"> Sair </button>
+
+                        <button id="controleDdados" class="hidden"> controleDdados </button>
+
                     </div>
                 </div>
                 
