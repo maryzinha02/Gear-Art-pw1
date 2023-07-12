@@ -63,10 +63,10 @@ document.querySelector('.abas #config').addEventListener('click', () => {
 
 document.querySelector('.abas2 #abaEntrar').addEventListener('click', () => {
     document.querySelector('.abas2 #abaEntrar').classList.add('ativa');
-    document.querySelector('.conteudos #entrar').setAttribute("class", "");
+    document.querySelector('.conteudo #entrar').setAttribute("class", "");
 
     document.querySelector('.abas2 #abaCadastrar').classList.remove('ativa');
-    document.querySelector('.conteudos #cadastrar').setAttribute("class", "hidden");
+    document.querySelector('.conteudo #cadastrar').setAttribute("class", "hidden");
 
     document.querySelector('#carrinhoCompras').setAttribute("class", "hidden");
     document.querySelector('#favoritos').setAttribute("class", "hidden");
@@ -76,10 +76,10 @@ document.querySelector('.abas2 #abaEntrar').addEventListener('click', () => {
 
 document.querySelector('.abas2 #abaCadastrar').addEventListener('click', () => {
     document.querySelector('.abas2 #abaCadastrar').classList.add('ativa');
-    document.querySelector('.conteudos #cadastrar').setAttribute("class", "");
+    document.querySelector('.conteudo #cadastrar').setAttribute("class", "");
 
     document.querySelector('.abas2 #abaEntrar').classList.remove('ativa');
-    document.querySelector('.conteudos #entrar').setAttribute("class", "hidden");
+    document.querySelector('.conteudo #entrar').setAttribute("class", "hidden");
 
     document.querySelector('#carrinhoCompras').setAttribute("class", "hidden");
     document.querySelector('#favoritos').setAttribute("class", "hidden");
@@ -93,7 +93,7 @@ document.querySelector('#mercha').addEventListener('click', () => {
     document.querySelector('#configSec').setAttribute("class" , "");
 
     document.querySelector('.abas2 #abaCadastrar').classList.add('ativa');
-    document.querySelector('.conteudos #cadastrar').setAttribute("class", "hidden"); 
+    document.querySelector('.conteudo #cadastrar').setAttribute("class", "hidden"); 
     
     document.querySelector('#homepageSec').setAttribute("class" , "hidden");
     document.querySelector('.abas #homepage').classList.remove('ativa');
@@ -105,7 +105,7 @@ document.querySelector('#mercha').addEventListener('click', () => {
     document.querySelector('.abas #cadPinturas').classList.remove('ativa');
 
     document.querySelector('.abas2 #abaEntrar').classList.remove('ativa');
-    document.querySelector('.conteudos #entrar').setAttribute("class", "hidden");
+    document.querySelector('.conteudo #entrar').setAttribute("class", "hidden");
 
     document.querySelector('#carrinhoCompras').setAttribute("class", "hidden");
     document.querySelector('#favoritos').setAttribute("class", "hidden");
@@ -114,12 +114,71 @@ document.querySelector('#mercha').addEventListener('click', () => {
 
 });
 
+
+//ir pro carrinho
+document.querySelector('#shopCart').addEventListener('click', () => {
+    document.querySelector('#carrinhoCompras').setAttribute("class", "");
+
+    document.querySelector('#homepageSec').setAttribute("class" , "hidden");
+    document.querySelector('.abas #homepage').classList.remove('ativa');
+    
+    document.querySelector('#catalogoSec').setAttribute("class" , "hidden");
+    document.querySelector('.abas #catalogo').classList.remove('ativa');
+    
+    document.querySelector('#cadPinturasSec').setAttribute("class" , "hidden");
+    document.querySelector('.abas #cadPinturas').classList.remove('ativa');
+
+    document.querySelector('#configSec').setAttribute("class" , "hidden");
+    document.querySelector('.abas #config').classList.remove('ativa');
+
+    document.querySelector('.abas2 #abaCadastrar').classList.add('ativa');
+    document.querySelector('.conteudo #cadastrar').setAttribute("class", "hidden");
+
+    document.querySelector('.abas2 #abaEntrar').classList.remove('ativa');
+    document.querySelector('.conteudo #entrar').setAttribute("class", "hidden");
+
+    document.querySelector('#favoritos').setAttribute("class", "hidden");
+    document.querySelector('#suaConta').setAttribute("class", "hidden");
+    document.querySelector('#seNLogado').setAttribute("class" , "hidden");
+   
+    
+});
+
+//ir pro favoritos
+
+document.querySelector('#heart').addEventListener('click', () => {
+    document.querySelector('#favoritos').setAttribute("class", "");
+
+    document.querySelector('#homepageSec').setAttribute("class" , "hidden");
+    document.querySelector('.abas #homepage').classList.remove('ativa');
+    
+    document.querySelector('#catalogoSec').setAttribute("class" , "hidden");
+    document.querySelector('.abas #catalogo').classList.remove('ativa');
+    
+    document.querySelector('#cadPinturasSec').setAttribute("class" , "hidden");
+    document.querySelector('.abas #cadPinturas').classList.remove('ativa');
+
+    document.querySelector('#configSec').setAttribute("class" , "hidden");
+    document.querySelector('.abas #config').classList.remove('ativa');
+
+    document.querySelector('.abas2 #abaCadastrar').classList.add('ativa');
+    document.querySelector('.conteudo #cadastrar').setAttribute("class", "hidden");
+
+    document.querySelector('.abas2 #abaEntrar').classList.remove('ativa');
+    document.querySelector('.conteudo #entrar').setAttribute("class", "hidden");
+
+    document.querySelector('#carrinhoCompras').setAttribute("class", "hidden");
+    document.querySelector('#suaConta').setAttribute("class", "hidden");
+    document.querySelector('#seNLogado').setAttribute("class" , "hidden");
+});
+
+
+
 //cadastro e login
 
 function TestarEmail(){
     if(loggedUser.email ==="maria@example.com"){
         document.querySelector('.abas #cadPinturas').setAttribute("class" , "");
-        document.querySelector('.conteudoCc #controleDdados').setAttribute("class", "");
     }
 }
 
@@ -142,30 +201,6 @@ var users = [];
 
 var loggedUser = null;
 
-//atributos do carrinho
-
-const listProdutos = document.querySelector('.container .cart-items');
-const precoTotal = document.querySelector('.container #precoTotal');
-
-var carrinhoVazio = true;
-
-var total = 0;
-
-var foiRemovido = false;
-
-var carrinhoItens = [];
-
-var emailRepetido = false;
-
-//atributos do favoritos
-
-const itensFavoritos = document.querySelector('.container #itensFavoritos');
-const favoritosKey = 'favoritoss';
-
-
-let favoritados = [];
-
-
 console.log(users);
 
 
@@ -187,7 +222,11 @@ document.querySelector("#cadastre").addEventListener("click", (prevent) => {
 
   if(name!=""&&email!=""&&password.value!=""){
         if(thisEmailcanExist === true){
-            console.log("pode cadastrar")
+
+            if(localStorage.getItem("users")){
+                users = JSON.parse(localStorage.getItem("users"));
+            }
+            
             var user = {
                 name: name,
                 email: email,
@@ -197,6 +236,7 @@ document.querySelector("#cadastre").addEventListener("click", (prevent) => {
             users.push(user);
 
             localStorage.setItem("users", JSON.stringify(users));
+
             console.log(localStorage.getItem("users"));
 
             let txt = '';
@@ -259,8 +299,6 @@ document.querySelector("#ent").addEventListener("click", (prevent) => {
     }
   });
 
-  
-
   if (!loggedUser) {
     logado = false;
 
@@ -272,6 +310,7 @@ document.querySelector("#ent").addEventListener("click", (prevent) => {
     message2.innerHTML = txt;
   }
 });
+
 
 //envento pra manter o usuario se recarregar a pagina
 function carregarDdados() {
@@ -296,9 +335,6 @@ function carregarDdados() {
             mercha.classList.add('mercha');
             btnSuaConta.classList.remove('hidden');
         }
-        //carregar catalogo
-        localStorage.getItem("pinturas");
-
 
         //carrinho do usuario
         const carrinhoKey = 'carrinho';
@@ -379,11 +415,9 @@ function carregarDdados() {
     }
 }
 
-carregarDdados();
-
 //verificador de senha
 function verificaSenha(){
-    const textaS = document.querySelector('.conteudos #textaPassword');
+    const textaS = document.querySelector('.conteudo #textaPassword');
 
     if(password.value.length != 0 ){
 
@@ -484,72 +518,84 @@ let pinturas = [
     preco: 1399.15
 }];
 
-localStorage.setItem("pinturas", JSON.stringify(pinturas));
-console.log(pinturas);
-
 const catalogo = document.querySelector('.catalogo');
-pinturas.forEach((cata) => {
 
-    var divPinturas = document.createElement("div");
+if(localStorage.getItem("pinturas")){
+    pinturas = JSON.parse(localStorage.getItem("pinturas"));
+}else {
+    localStorage.setItem("pinturas", JSON.stringify(pinturas));
+}
 
-    var btnAddChart = document.createElement("button");
-    btnAddChart.textContent = "Adicione ao carrinho";
-    btnAddChart.setAttribute("class", "btnAddChart");
+function gerarElementsP (){
 
-    var btnFavoritar = document.createElement("button");
-    btnFavoritar.textContent = "Favoritar";
-    btnFavoritar.setAttribute("class", "btnFavoritar");
-
-
-    divPinturas.classList.add("produtos");
-    divPinturas.innerHTML = `
-    <img src="${cata.img}" height="200px">
-        <h2>${cata.nome}</h2>
-        <h4>${cata.autor}</h4>
-        <h1>R$${cata.preco}</h1>
-
-    `;
-
-    catalogo.insertAdjacentElement("beforeend", divPinturas);
-    divPinturas.appendChild(btnAddChart);
-    divPinturas.appendChild(btnFavoritar);
-});
-
-const filtrarAutor = document.querySelector('#filtrarAutor');
-
-filtrarAutor.addEventListener('change', (obra) => {
-
-    catalogo.innerHTML = "";
     pinturas.forEach((cata) => {
-
-        if(obra.target.value === cata.autor || obra.target.value === 'Todos'){
-
-            var divPinturas = document.createElement("div");
-            divPinturas.classList.add("produtos");
-            
-            var btnAddChart = document.createElement("button");
-            btnAddChart.textContent = "Adicione ao carrinho";
-            btnAddChart.setAttribute("class", "btnAddChart");
-
-            var btnFavoritar = document.createElement("button");
-            btnFavoritar.textContent = "Favoritar";
-            btnFavoritar.setAttribute("class", "btnFavoritar");
-
-            divPinturas.innerHTML = `
+        var divPinturas = document.createElement("div");
+        divPinturas.classList.add("produtos");
+                
+        var btnAddChart = document.createElement("button");
+        btnAddChart.textContent = "Adicione ao carrinho";
+        btnAddChart.setAttribute("class", "btnAddChart");
+    
+        var btnFavoritar = document.createElement("button");
+        btnFavoritar.textContent = "Favoritar";
+        btnFavoritar.setAttribute("class", "btnFavoritar");
+    
+        divPinturas.innerHTML = `
             <img src="${cata.img}" height="200px">
                 <h2>${cata.nome}</h2>
                 <h4>${cata.autor}</h4>
                 <h1>${cata.preco}</h1>
-
+    
             `;
+    
+        catalogo.insertAdjacentElement("beforeend", divPinturas);
+        divPinturas.appendChild(btnAddChart);
+        divPinturas.appendChild(btnFavoritar);
 
-            catalogo.insertAdjacentElement("beforeend", divPinturas);
-            divPinturas.appendChild(btnAddChart);
-            divPinturas.appendChild(btnFavoritar);
-        }
     });
-});
 
+    const filtrarAutor = document.querySelector('#filtrarAutor');
+
+    filtrarAutor.addEventListener('change', (obra) => {
+        
+        console.log(pinturas);
+    
+        catalogo.innerHTML = "";
+        pinturas.forEach((cata) => {
+            //console.log(cata.autor);
+            if(obra.target.value === cata.autor || obra.target.value === "Todos"){
+    
+                var divPinturas = document.createElement("div");
+                divPinturas.classList.add("produtos");
+                
+                var btnAddChart = document.createElement("button");
+                btnAddChart.textContent = "Adicione ao carrinho";
+                btnAddChart.setAttribute("class", "btnAddChart");
+    
+                var btnFavoritar = document.createElement("button");
+                btnFavoritar.textContent = "Favoritar";
+                btnFavoritar.setAttribute("class", "btnFavoritar");
+    
+                divPinturas.innerHTML = `
+                <img src="${cata.img}" height="200px">
+                    <h2>${cata.nome}</h2>
+                    <h4>${cata.autor}</h4>
+                    <h1>${cata.preco}</h1>
+    
+                `;
+    
+                catalogo.insertAdjacentElement("beforeend", divPinturas);
+                divPinturas.appendChild(btnAddChart);
+                divPinturas.appendChild(btnFavoritar);
+
+            }
+        });
+    });
+        
+}
+
+gerarElementsP();
+ 
 //sua Conta
 document.querySelector('#btnSuaConta').addEventListener('click', (prevent) => {
     prevent.preventDefault();
@@ -569,10 +615,10 @@ document.querySelector('#btnSuaConta').addEventListener('click', (prevent) => {
     document.querySelector('.abas #config').classList.remove('ativa');
 
     document.querySelector('.abas2 #abaCadastrar').classList.add('ativa');
-    document.querySelector('.conteudos #cadastrar').setAttribute("class", "hidden");
+    document.querySelector('.conteudo #cadastrar').setAttribute("class", "hidden");
 
     document.querySelector('.abas2 #abaEntrar').classList.remove('ativa');
-    document.querySelector('.conteudos #entrar').setAttribute("class", "hidden");
+    document.querySelector('.conteudo #entrar').setAttribute("class", "hidden");
 
     document.querySelector('#carrinhoCompras').setAttribute("class", "hidden");
     document.querySelector('#favoritos').setAttribute("class", "hidden");
@@ -592,6 +638,7 @@ document.querySelector('#btnSuaConta').addEventListener('click', (prevent) => {
     Luemail.innerHTML = txtEmail;
 
 });
+// logout
 
 document.querySelector('#logout').addEventListener('click', () => {
 
@@ -614,10 +661,10 @@ document.querySelector('#logout').addEventListener('click', () => {
     document.querySelector('#configSec').setAttribute("class" , "");
 
     document.querySelector('.abas2 #abaEntrar').classList.add('ativa');
-    document.querySelector('.conteudos #entrar').setAttribute("class", "");
+    document.querySelector('.conteudo #entrar').setAttribute("class", "");
     
     document.querySelector('.abas2 #abaCadastrar').classList.remove('ativa');
-    document.querySelector('.conteudos #cadastrar').setAttribute("class", "hidden");
+    document.querySelector('.conteudo #cadastrar').setAttribute("class", "hidden");
     
     document.querySelector('#carrinhoCompras').setAttribute("class", "hidden");
     document.querySelector('#favoritos').setAttribute("class", "hidden");
@@ -628,100 +675,188 @@ document.querySelector('#logout').addEventListener('click', () => {
 
 });
 
-//ir pro carrinho
-document.querySelector('#shopCart').addEventListener('click', () => {
-    document.querySelector('#carrinhoCompras').setAttribute("class", "");
 
+//Cadastrar produtos
+
+document.querySelector('.abas #cadPinturas').addEventListener('click', () => {
+    document.querySelector('#cadPinturasSec').setAttribute("class" , "");
+    document.querySelector('.abas #cadPinturas').classList.add('ativa');
+        
+    
     document.querySelector('#homepageSec').setAttribute("class" , "hidden");
     document.querySelector('.abas #homepage').classList.remove('ativa');
     
     document.querySelector('#catalogoSec').setAttribute("class" , "hidden");
     document.querySelector('.abas #catalogo').classList.remove('ativa');
     
-    document.querySelector('#cadPinturasSec').setAttribute("class" , "hidden");
-    document.querySelector('.abas #cadPinturas').classList.remove('ativa');
-
     document.querySelector('#configSec').setAttribute("class" , "hidden");
     document.querySelector('.abas #config').classList.remove('ativa');
-
-    document.querySelector('.abas2 #abaCadastrar').classList.add('ativa');
-    document.querySelector('.conteudos #cadastrar').setAttribute("class", "hidden");
-
-    document.querySelector('.abas2 #abaEntrar').classList.remove('ativa');
-    document.querySelector('.conteudos #entrar').setAttribute("class", "hidden");
-
+    
+    document.querySelector('#carrinhoCompras').setAttribute("class", "hidden");
     document.querySelector('#favoritos').setAttribute("class", "hidden");
     document.querySelector('#suaConta').setAttribute("class", "hidden");
     document.querySelector('#seNLogado').setAttribute("class" , "hidden");
-   
-    
 });
 
+const mostraImgs = document.querySelector('#mostraImgs');
+
+let imgP = '';
+
+document.querySelector('#imgProd').addEventListener('change', (obraP) => {
+    //console.log(obraP.target.value);
+    
+
+    if(obraP.target.value==="Frida Kahlo Autoretrato"){
+        imgP = "assets/img/fridaCoracao.jpeg";
+        mostraImgs.innerHTML = `<img src=${imgP} height="180px">`;
+
+    }else if(obraP.target.value ==="Frida Kahlo Vestidos"){
+        imgP = "assets/img/fridaVestidos.jpeg";
+        mostraImgs.innerHTML = `<img src=${imgP} height="180px">`;
+
+    }else if(obraP.target.value==="Van Gogh bar"){
+        imgP = "assets/img/vanBar.jpeg";
+        mostraImgs.innerHTML = `<img src=${imgP} height="180px">`;
+
+    }else if(obraP.target.value==="Van Gogh paisagem"){
+        imgP ="assets/img/vanArvore.jpeg";
+        mostraImgs.innerHTML = `<img src=${imgP} height="180px">`;
+
+    }else if(obraP.target.value==="Van Gogh casa"){
+        imgP = "assets/img/vanCasa.jpeg";
+        mostraImgs.innerHTML = `<img src=${imgP} height="180px">`;
+
+    }else if(obraP.target.value==="Leonardo d Vinc autoretrato"){
+        imgP = "assets/img/leodVinc.jpeg";
+        mostraImgs.innerHTML = `<img src=${imgP} height="180px">`;
+    }
+});
+
+const divCadP = document.querySelector('#cadProdOk');
+
+document.querySelector('#btnCadProd').addEventListener('click', (e6) => {
+    e6.preventDefault();
+
+    if (localStorage.getItem("pinturas")) {
+        pinturas = JSON.parse(localStorage.getItem("pinturas"));
+    }
+
+    var nomeP = document.querySelector('#nomeProd').value;
+    var autorP = document.querySelector('#autorProd').value;
+    var precoP = document.querySelector('#precoProd').value;
+
+    if(nomeP!=""&&autorP!=""&&precoP!=""){
+        const obraNova = {
+            img: imgP,
+            nome: nomeP,
+            autor: autorP,
+            preco: parseFloat(precoP)
+        }
+
+        pinturas.push(obraNova);
+        localStorage.setItem("pinturas", JSON.stringify(pinturas));
+
+        catalogo.innerHTML = "";
+
+        gerarElementsP();
+
+        let pC = '';
+        pC = `Obra enviada com sucesso!`;
+        divCadP.innerHTML = pC;
+
+    } else {
+
+        let pC = '';
+        pC = `Preencha todos os campos!`;
+        divCadP.innerHTML = pC;
+    }
+});
+
+
+const listProdutos = document.querySelector('.container .cart-items');
+const precoTotal = document.querySelector('.container #precoTotal');
+
+var carrinhoVazio = true;
+
+var total = 0;
+
+var foiRemovido = false;
+
+var carrinhoItens = [];
+
+var emailRepetido = false;
+
+
 document.querySelectorAll('.btnAddChart').forEach((e,i) => e.addEventListener('click', () => {
-   
+    
     if(logado===true){
         console.log("entrei");
 
         document.querySelector('#seNLogado').setAttribute("class", "hidden");
         const carrinhoKey = 'carrinho';
-        
-        let carrinhoItens = localStorage.getItem(carrinhoKey);
+            
+        let carrinhoItens = localStorage.getItem(carrinhoKey);    
         carrinhoItens = carrinhoItens ? JSON.parse(carrinhoItens) : [];
-    
+        
         pinturas.forEach((cata2, posi2) => {
             listProdutos.classList.remove('hidden');
 
             if (posi2 == i) {
-                carrinhoVazio = false;
-        
+                //carrinhoVazio = false;
+            
                 var item = {
                 img: cata2.img,
                 nome: cata2.nome,
                 preco: cata2.preco
                 };
-        
+            
                 carrinhoItens.push(item);
                 carrinhoVazio = false;
-        
+            
                 var divCarrinho = document.createElement("div");
                 var btnRemover = document.createElement("button");
                 btnRemover.textContent = "Remover";
                 btnRemover.setAttribute("class", "removeItem");
-        
+            
                 divCarrinho.innerHTML = `
                 <img src="${item.img}" height="130px">
-                <h2>${item.nome}</h2>
-                <h1>${item.preco}</h1>
+                    <h2>${item.nome}</h2>
+                    <h1>${item.preco}</h1>
                 `;
-        
+            
                 listProdutos.insertAdjacentElement("beforeend", divCarrinho);
                 divCarrinho.appendChild(btnRemover);
-        
+            
                 e.textContent = "Adicionado!";
                 console.log(carrinhoItens);
-        
+            
                 localStorage.setItem(carrinhoKey, JSON.stringify(carrinhoItens));
-        
+            
                 btnRemover.addEventListener('click', (btn, i) => {
                     btn.target.parentElement.remove();
                     e.textContent = "Adicione ao carrinho";
 
                     total -= item.preco;
-            
+                    
                     let pT = '';
                     pT = `Preço total: ${total.toFixed(2)}`;
                     precoTotal.innerHTML = pT;
 
                     carrinhoVazio = true;
 
+                    carrinhoItens = carrinhoItens.filter((carrinhoItem) => carrinhoItem.nome !== item.nome);
+                        
+                    // Atualizar o localStorage
+                    localStorage.setItem(carrinhoKey, JSON.stringify(carrinhoItens));
+
                 });
-    
-                if (foiRemovido == false) {
-                total += item.preco;
         
-                let pT = '';
-                pT = `Preço total: ${total.toFixed(2)}`;
-                precoTotal.innerHTML = pT;
+                if (foiRemovido == false) {
+                    total += item.preco;
+            
+                    let pT = '';
+                    pT = `Preço total: ${total.toFixed(2)}`;
+                    precoTotal.innerHTML = pT;
                 }
 
             }
@@ -731,8 +866,9 @@ document.querySelectorAll('.btnAddChart').forEach((e,i) => e.addEventListener('c
     } else {
         document.querySelector('#seNLogado').setAttribute("class", "");
         e.textContent = "Adicione ao carrinho";
-      }
+    }
 }));
+
 
 document.querySelector('#comprarItem').addEventListener('click',() => {
     listProdutos.classList.remove('hidden');
@@ -740,6 +876,9 @@ document.querySelector('#comprarItem').addEventListener('click',() => {
     if(carrinhoVazio==false){
        alert("Parabéns! compra efetuada com sucesso!");
        listProdutos.classList.add('hidden');
+       precoTotal.innerHTML = "Preco Total: 0.00";
+
+       localStorage.removeItem(carrinhoKey);
 
     }else{
         alert("Adicione itens no carrinho!"); 
@@ -747,35 +886,13 @@ document.querySelector('#comprarItem').addEventListener('click',() => {
     
 });
 
-//ir pro favoritos
-
-document.querySelector('#heart').addEventListener('click', () => {
-    document.querySelector('#favoritos').setAttribute("class", "");
-
-    document.querySelector('#homepageSec').setAttribute("class" , "hidden");
-    document.querySelector('.abas #homepage').classList.remove('ativa');
-    
-    document.querySelector('#catalogoSec').setAttribute("class" , "hidden");
-    document.querySelector('.abas #catalogo').classList.remove('ativa');
-    
-    document.querySelector('#cadPinturasSec').setAttribute("class" , "hidden");
-    document.querySelector('.abas #cadPinturas').classList.remove('ativa');
-
-    document.querySelector('#configSec').setAttribute("class" , "hidden");
-    document.querySelector('.abas #config').classList.remove('ativa');
-
-    document.querySelector('.abas2 #abaCadastrar').classList.add('ativa');
-    document.querySelector('.conteudos #cadastrar').setAttribute("class", "hidden");
-
-    document.querySelector('.abas2 #abaEntrar').classList.remove('ativa');
-    document.querySelector('.conteudos #entrar').setAttribute("class", "hidden");
-
-    document.querySelector('#carrinhoCompras').setAttribute("class", "hidden");
-    document.querySelector('#suaConta').setAttribute("class", "hidden");
-    document.querySelector('#seNLogado').setAttribute("class" , "hidden");
-});
-
 //favoritar
+
+const itensFavoritos = document.querySelector('.container #itensFavoritos');
+const favoritosKey = 'favoritoss';
+
+
+let favoritados = [];
 
 document.querySelectorAll('.btnFavoritar').forEach((e1,i1) => e1.addEventListener('click', () => {
     
@@ -834,127 +951,5 @@ document.querySelectorAll('.btnFavoritar').forEach((e1,i1) => e1.addEventListene
     }
 }));
 
-document.querySelector('.conteudoCc #controleDdados').addEventListener('click', () => {
-    localStorage.clear();
-});
 
-//Cadastrar produtos
-
-document.querySelector('.abas #cadPinturas').addEventListener('click', () => {
-    document.querySelector('#cadPinturasSec').setAttribute("class" , "");
-    document.querySelector('.abas #cadPinturas').classList.add('ativa');
-        
-    
-    document.querySelector('#homepageSec').setAttribute("class" , "hidden");
-    document.querySelector('.abas #homepage').classList.remove('ativa');
-    
-    document.querySelector('#catalogoSec').setAttribute("class" , "hidden");
-    document.querySelector('.abas #catalogo').classList.remove('ativa');
-    
-    document.querySelector('#configSec').setAttribute("class" , "hidden");
-    document.querySelector('.abas #config').classList.remove('ativa');
-    
-    document.querySelector('#carrinhoCompras').setAttribute("class", "hidden");
-    document.querySelector('#favoritos').setAttribute("class", "hidden");
-    document.querySelector('#suaConta').setAttribute("class", "hidden");
-    document.querySelector('#seNLogado').setAttribute("class" , "hidden");
-});
-
-const mostraImgs = document.querySelector('#mostraImgs');
-
-let imgP = '';
-
-document.querySelector('#imgProd').addEventListener('change', (obraP) => {
-    //console.log(obraP.target.value);
-    
-
-    if(obraP.target.value==="Frida Kahlo Autoretrato"){
-        imgP = "assets/img/fridaCoracao.jpeg";
-        mostraImgs.innerHTML = `<img src="${imgP}>" height="180px">`;
-
-    }else if(obraP.target.value ==="Frida Kahlo Vestidos"){
-        imgP = "assets/img/fridaVestidos.jpeg";
-        mostraImgs.innerHTML = `<img src=${imgP} height="180px">`;
-
-    }else if(obraP.target.value==="Van Gogh bar"){
-        imgP = "assets/img/vanBar.jpeg";
-        mostraImgs.innerHTML = `<img src=${imgP} height="180px">`;
-
-    }else if(obraP.target.value==="Van Gogh paisagem"){
-        imgP ="assets/img/vanArvore.jpeg";
-        mostraImgs.innerHTML = `<img src=${imgP} height="180px">`;
-
-    }else if(obraP.target.value==="Van Gogh casa"){
-        imgP = "assets/img/vanCasa.jpeg";
-        mostraImgs.innerHTML = `<img src=${imgP} height="180px">`;
-
-    }else if(obraP.target.value==="Leonardo d Vinc autoretrato"){
-        imgP = "assets/img/leodVinc.jpeg";
-        mostraImgs.innerHTML = `<img src=${imgP} height="180px">`;
-    }
-});
-
-const divCadP = document.querySelector('#cadProdOk');
-
-document.querySelector('#btnCadProd').addEventListener('click', (e6) => {
-    e6.preventDefault();
-
-    if (localStorage.getItem("pinturas")) {
-        pinturas = JSON.parse(localStorage.getItem("pinturas"));
-    }
-
-    var nomeP = document.querySelector('#nomeProd').value;
-    var autorP = document.querySelector('#autorProd').value;
-    var precoP = document.querySelector('#precoProd').value;
-
-    if(nomeP!=""&&autorP!=""&&precoP!=""){
-        const obraNova = {
-            img: imgP,
-            nome: nomeP,
-            autor: autorP,
-            preco: parseFloat(precoP)
-        }
-
-        pinturas.push(obraNova);
-        localStorage.setItem("pinturas", JSON.stringify(pinturas));
-
-        console.log(pinturas);
-
-        catalogo.innerHTML = "";
-
-        pinturas.forEach((cata) => {
-            var divPinturas = document.createElement("div");
-      
-            var btnAddChart = document.createElement("button");
-            btnAddChart.textContent = "Adicione ao carrinho";
-            btnAddChart.setAttribute("class", "btnAddChart");
-      
-            var btnFavoritar = document.createElement("button");
-            btnFavoritar.textContent = "Favoritar";
-            btnFavoritar.setAttribute("class", "btnFavoritar");
-      
-            divPinturas.classList.add("produtos");
-            divPinturas.innerHTML = `
-              <img src="${cata.img}" height="200px">
-              <h2>${cata.nome}</h2>
-              <h4>${cata.autor}</h4>
-              <h1>R$${cata.preco}</h1>
-            `;
-      
-            catalogo.appendChild(divPinturas);
-            divPinturas.appendChild(btnAddChart);
-            divPinturas.appendChild(btnFavoritar);
-        });
-
-        let pC = '';
-        pC = `Obra enviada com sucesso!`;
-        divCadP.innerHTML = pC;
-
-    } else {
-
-        let pC = '';
-        pC = `Preencha todos os campos!`;
-        divCadP.innerHTML = pC;
-    }
-});
-
+carregarDdados();
